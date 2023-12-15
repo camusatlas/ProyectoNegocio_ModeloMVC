@@ -43,7 +43,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -216,6 +216,7 @@
         }
 
         function Guardar() {
+            debugger;
     var Usuario = {
         IdUsuario: $("#txtid").val(),
         Activo: $("#cboactivo").val() == 1 ? true : false,
@@ -231,11 +232,15 @@
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
         success: function (data) {
+
+            // Nuevo Usuario
             if (Usuario.IdUsuario == 0) {
                 if (data.resultado !== 0) {
+
                     Usuario.IdUsuario = data.resultado;
                     tabladata.row.add(Usuario).draw(false);
                     $("#formModal").modal("hide");
+
                 } else {
                     $("#mensajeError").text(data.mensaje);
                     $("#mensajeError").show();

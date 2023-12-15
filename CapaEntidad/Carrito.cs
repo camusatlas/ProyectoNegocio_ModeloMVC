@@ -10,7 +10,7 @@ namespace CapaEntidad
     {
         public int IdCarrito { get; set; }
         public Cliente oCliente { get; set; }
-        public Produto oProducto  { get; set; }
+        public Producto oProducto  { get; set; }
         public int Cantidad { get; set; }
 
 

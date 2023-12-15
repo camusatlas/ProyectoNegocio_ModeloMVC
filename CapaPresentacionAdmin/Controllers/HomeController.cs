@@ -14,10 +14,13 @@ namespace CapaPresentacionAdmin.Controllers
             return View();
         }
 
+        // Vista de la Pagina Usuario
         public ActionResult Usuarios()
         {
             return View();
         }
+
+        // Listar Usuario
         [HttpGet]
         public JsonResult ListarUsuarios()
         {
@@ -27,6 +30,8 @@ namespace CapaPresentacionAdmin.Controllers
 
             return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
         }
+
+        // Registrar y Editar Usuario
         [HttpPost]
         public JsonResult GuardarUsuario(Usuario objeto)
         {
@@ -43,7 +48,7 @@ namespace CapaPresentacionAdmin.Controllers
             return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
 
-        // Eliminar
+        // Eliminar Usuario
         [HttpPost]
         public JsonResult EliminarUsuarios(int id)
         {
