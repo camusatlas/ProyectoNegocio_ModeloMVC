@@ -136,9 +136,9 @@ namespace CapaDatos
 
         /*------------------------------------------------------------------------------------------------------------------------*/
         // Guardar Datos de Imagen
-        public bool GuardarDatosImagen(Producto oProducto, out string Mensaje)
+        public bool GuardarDatosImagen(Producto obj, out string Mensaje)
         {
-             bool resultado = false;
+            bool resultado = false;
             Mensaje = string.Empty;
             try
             {
@@ -146,9 +146,9 @@ namespace CapaDatos
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("Precio", oProducto.RutaImagen);
-                    cmd.Parameters.AddWithValue("Stock", oProducto.NombreImagen);
-                    cmd.Parameters.AddWithValue("Activo", oProducto.IdProducto);
+                    cmd.Parameters.AddWithValue("Precio", obj.RutaImagen);
+                    cmd.Parameters.AddWithValue("Stock", obj.NombreImagen);
+                    cmd.Parameters.AddWithValue("Activo", obj.IdProducto);
 
                     cn.Open();
                     if (cmd.ExecuteNonQuery() > 0)
