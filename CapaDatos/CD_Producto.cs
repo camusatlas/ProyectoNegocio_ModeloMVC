@@ -34,7 +34,6 @@ namespace CapaDatos
                     {
                         Producto producto = new Producto()
                         {
-                            IdProducto = Convert.ToInt32(dr["IdProducto"]),
                             Nombre = dr["Nombre"].ToString(),
                             Descripcion = dr["Descripcion"].ToString(),
                             oMarca = new Marca() { IdMarca = Convert.ToInt32(dr["IdMarca"]), Descripcion = dr["DesMarca"].ToString() },
@@ -146,9 +145,9 @@ namespace CapaDatos
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("Precio", obj.RutaImagen);
-                    cmd.Parameters.AddWithValue("Stock", obj.NombreImagen);
-                    cmd.Parameters.AddWithValue("Activo", obj.IdProducto);
+                    cmd.Parameters.AddWithValue("@RutaImagen", obj.RutaImagen);
+                    cmd.Parameters.AddWithValue("@NombreImagen", obj.NombreImagen);
+                    cmd.Parameters.AddWithValue("@IdProducto", obj.IdProducto);
 
                     cn.Open();
                     if (cmd.ExecuteNonQuery() > 0)

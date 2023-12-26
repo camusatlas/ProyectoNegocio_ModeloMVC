@@ -70,6 +70,9 @@ namespace CapaNegocio
             return resultado;
         }
 
-
+        public static string ConvertirBase64(string v, out bool conversion)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
