@@ -216,7 +216,7 @@ namespace CapaPresentacionAdmin.Controllers
             {
                 conversion = conversion,
                 textobase64 = textoBase64,
-                extension = Path.GetExtension(oproducto.Nombre)
+                extension = Path.GetExtension(oproducto.NombreImagen)
             },
             JsonRequestBehavior.AllowGet);
 

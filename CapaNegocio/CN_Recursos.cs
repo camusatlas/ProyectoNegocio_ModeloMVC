@@ -62,7 +62,7 @@ namespace CapaNegocio
 
 
             }
-            catch (Exception ex)
+            catch (Exception ex)    
             {
                 resultado = false;
                 
@@ -70,9 +70,21 @@ namespace CapaNegocio
             return resultado;
         }
 
-        public static string ConvertirBase64(string v, out bool conversion)
+        public static string ConvertirBase64(string ruta, out bool conversion)
         {
-            throw new NotImplementedException();
+            string textoBase64 = string.Empty;
+            conversion = true;
+
+            try
+            {
+                byte[] bytes = File.ReadAllBytes(ruta);
+                textoBase64 = Convert.ToBase64String(bytes);
+            }
+            catch (Exception)
+            {
+                conversion = false;
+            }
+            return textoBase64;
         }
     }
 }

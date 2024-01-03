@@ -345,16 +345,25 @@
                 $("#cboactivo").val(json.Activo ? 1 : 0);
 
                 jQuery.ajax({
-                    url: '@Url.Action("ImagenProducto","Mantenedor")',
+                    url: '@Url.Action("ImagenProducto", "Mantenedor")',
                     type: "POST",
                     data: JSON.stringify({ id: json.IdProducto }),
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (data) {
                         if (data.conversion) {
-                            $("#img_producto").attr({ "src": "data:image/" + data.extension + ";base," + data.textbase64 });
+                            $("#img_producto").attr({ "src": "data:image/" + data.extension + ";base64," + data.textobase64 });
                         }
                     },
+                    error: function (error) {
+                        $("#img_producto").LoadingOverlay("hide");
+
+                        $("#mensajeError").show();
+                        $("#mensajeError").text("Error al mostrar imagen");
+                    },
+                    beforeSend: function () {
+                        
+                    }
                 })
 
 
@@ -416,7 +425,7 @@
                 if (data.idGenerado !== 0) {
 
                     Producto.IdProducto = data.resultado;
-                    tabladata.row.add(Producro).draw(false);
+                    tabladata.row.add(Producto).draw(false);
                     $("#formModal").modal("hide");
 
                 } else {
@@ -427,7 +436,7 @@
             // Producto Editado
             else {
                 if (data.data) {
-                    tabladata.row(filaSeleccionada).data(Producro).draw(false);
+                    tabladata.row(filaSeleccionada).data(Producto).draw(false);
                     $("#formModal").modal("hide");
                 } else {
                     $("#mensajeError").text(data.mensaje);
