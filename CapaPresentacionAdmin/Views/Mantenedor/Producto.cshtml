@@ -276,12 +276,12 @@
     });
 
     $("#tabla tbody").on("click", '.btn-eliminar', function () {
-        var categoriaSeleccionada = $(this).closest("tr");
-        var data = tabladata.row(categoriaSeleccionada).data();
+        var productoSeleccionado = $(this).closest("tr");
+        var data = tabladata.row(productoSeleccionado).data();
 
         swal({
             title: "¿Está seguro?",
-            text: "¿Desea eliminar la categoria?",
+            text: "¿Desea eliminar la Producto?",
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-primary",
@@ -289,19 +289,21 @@
             cancelButtonText: "No",
             closeOnConfirm: true
         },
+        
             function () {
-                var Marca = {
-                    IdMarca: data.IdMarca // Obtener el IdUsuario del registro
+                debugger;
+                var Producto = {
+                    IdProducto: data.IdProducto // Obtener el IdUsuario del registro
             };
             jQuery.ajax({
-                url: '@Url.Action("EliminarMarca", "Mantenedor")',
+                url: '@Url.Action("EliminarProducto", "Mantenedor")',
                 type: 'POST',
-                data: JSON.stringify({ id: Marca.IdMarca }), // Enviar solo el IdUsuario
+                data: JSON.stringify({ id: Producto.IdProducto }), // Enviar solo el IdUsuario
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     if (data.resultado) {
-                        tabladata.row(categoriaSeleccionada).remove().draw();
+                        tabladata.row(productoSeleccionado).remove().draw();
                     } else {
                         swal("No se pudo eliminar", data.mensaje, "error");
                     }
@@ -342,7 +344,7 @@
                 $("#cbocategoria").val(json.oCategoria.IdCategoria);
                 $("#txtprecio").val(json.Precio);
                 $("#txtstock").val(json.Stock);
-                $("#cboactivo").val(json.Activo ? 1 : 0);
+                $("#cboactivo").val(json.Activo == true ? 1 : 0);
 
                 jQuery.ajax({
                     url: '@Url.Action("ImagenProducto", "Mantenedor")',
@@ -351,6 +353,9 @@
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (data) {
+
+                        $("#img_producto").LoadingOverlay("hide");
+
                         if (data.conversion) {
                             $("#img_producto").attr({ "src": "data:image/" + data.extension + ";base64," + data.textobase64 });
                         }
@@ -362,7 +367,8 @@
                         $("#mensajeError").text("Error al mostrar imagen");
                     },
                     beforeSend: function () {
-                        
+                        $("#img_producto").LoadingOverlay("show");
+
                     }
                 })
 
@@ -380,7 +386,7 @@
         }
 
         function Guardar() {
-
+            debugger;
             if (!$("#contenedor").valid()) {
                 return;
             }

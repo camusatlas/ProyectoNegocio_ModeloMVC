@@ -34,6 +34,7 @@ namespace CapaDatos
                     {
                         Producto producto = new Producto()
                         {
+                            IdProducto = Convert.ToInt32(dr["IdProducto"]),
                             Nombre = dr["Nombre"].ToString(),
                             Descripcion = dr["Descripcion"].ToString(),
                             oMarca = new Marca() { IdMarca = Convert.ToInt32(dr["IdMarca"]), Descripcion = dr["DesMarca"].ToString() },
@@ -60,7 +61,7 @@ namespace CapaDatos
             return listado;
         }
 
-        // Crear Categoria
+        // Crear Producto
         public int Registrar(Producto obj, out string Mensaje)
         {
             int idautogenerado = 0;
@@ -102,7 +103,7 @@ namespace CapaDatos
             Mensaje = string.Empty;
             try
             {
-                using (SqlCommand cmd = new SqlCommand("sp_EditarMarca", cn))
+                using (SqlCommand cmd = new SqlCommand("sp_EditarProducto", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -114,8 +115,9 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("Precio", obj.Precio);
                     cmd.Parameters.AddWithValue("Stock", obj.Stock);
                     cmd.Parameters.AddWithValue("Activo", obj.Activo);
-                    cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    
 
                     cn.Open();
                     cmd.ExecuteNonQuery();
@@ -186,7 +188,7 @@ namespace CapaDatos
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("Producto", id);
+                    cmd.Parameters.AddWithValue("IdProducto", id);
                     cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
 

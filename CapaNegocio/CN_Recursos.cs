@@ -80,7 +80,7 @@ namespace CapaNegocio
                 byte[] bytes = File.ReadAllBytes(ruta);
                 textoBase64 = Convert.ToBase64String(bytes);
             }
-            catch (Exception)
+            catch
             {
                 conversion = false;
             }

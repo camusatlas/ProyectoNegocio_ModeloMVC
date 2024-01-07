@@ -45,6 +45,7 @@
     <Compile Include="CD_Categoria.cs" />
     <Compile Include="CD_Marca.cs" />
     <Compile Include="CD_Producto.cs" />
+    <Compile Include="CD_Reporte.cs" />
     <Compile Include="CD_Usuarios.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,6 +55,11 @@
       <Project>{bb9b7f22-69a0-4b48-9f33-0f982f1d043a}</Project>
       <Name>CapaEntidad</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="jQuery.Validation">
+      <Version>1.17.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
