@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Web.Mvc;
 using CapaEntidad;
 using CapaNegocio;
@@ -121,7 +122,15 @@ namespace CapaPresentacionAdmin.Controllers
             }
             dt.TableName = "Datos";
 
-            using (XLWorkbook wb = new  )
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformas-officedocument.spreadsheetml.sheet")
+                }
+            }
 
         }
 
