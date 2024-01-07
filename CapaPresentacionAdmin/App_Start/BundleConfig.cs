@@ -18,6 +18,9 @@ namespace CapaPresentacionAdmin
                         "~/Scripts/loadingoverlay/loadingoverlay.min.js",
                         "~/Scripts/jquery.validate.js",
                         "~/Scripts/sweetalert.min.js",
+                        "~/Scripts/jquery-ui.js",
+
+
 
                         "~/Scripts/scripts.js"));
 
@@ -37,7 +40,8 @@ namespace CapaPresentacionAdmin
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css",
                                                                  "~/Content/DataTables/css/jquery.dataTables.css",
                                                                  "~/Content/DataTable/css/responsive.dataTables.css",
-                                                                 "~/Content/sweetalert.css"));
+                                                                 "~/Content/sweetalert.css",
+                                                                 "~/Content/jquery-ui.css"));
         }
     }
 }

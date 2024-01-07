@@ -64,7 +64,7 @@ namespace CapaPresentacionAdmin.Controllers
         // Lista de Resportes
 
         [HttpGet]
-        public JsonResult ListaRespote(string fechainicio, string fechafin, string idtransaccion)
+        public JsonResult ListaReporte(string fechainicio, string fechafin, string idtransaccion)
         {
             List<Reporte> oLista = new List<Reporte>();
 
