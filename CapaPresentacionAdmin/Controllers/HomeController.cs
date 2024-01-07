@@ -128,7 +128,7 @@ namespace CapaPresentacionAdmin.Controllers
                 using (MemoryStream stream = new MemoryStream())
                 {
                     wb.SaveAs(stream);
-                    return File(stream.ToArray(), "application/vnd.openxmlformas-officedocument.spreadsheetml.sheet")
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ResporteVenta" + DateTime.Now.ToString() + ".xlsx");
                 }
             }
 
