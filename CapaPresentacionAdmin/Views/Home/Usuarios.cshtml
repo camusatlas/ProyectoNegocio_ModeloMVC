@@ -226,7 +226,7 @@
     };
 
     jQuery.ajax({
-        url: '@Url.Action("GuardarUsuario","Home")',
+        url: '@Url.Action("GuardarUsuario", "Home")',
         type: 'POST',
         data: JSON.stringify({ objeto: Usuario }),
         dataType: 'json',
