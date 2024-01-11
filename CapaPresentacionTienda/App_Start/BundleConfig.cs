@@ -22,10 +22,15 @@ namespace CapaPresentacionTienda
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.bundle.js",
                       "~/Scripts/fontawesome/all.min.js",
-                      "~/Scripts/fontawesome/all.min.js"
+                      "~/Scripts/loadingoverlay.min.js",
+                      "~/Scripts/sweetalert.js"
                       ));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/Site.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                                                                    "~/Content/Site.css",
+                                                                    "~/Content/sweetalert.css"
+                                                                    
+                                                                    ));
         }
     }
 }

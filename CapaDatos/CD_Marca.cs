@@ -147,5 +147,39 @@ namespace CapaDatos
             }
             return resultado;
         }
+
+        public List<Marca> listarMarcaporCategoria(int idcategoria)
+        {
+            List<Marca> listado = new List<Marca>();
+            SqlCommand cmd = new SqlCommand("ListarMarcaPorCategoria", cn);
+            cmd.Parameters.AddWithValue("IdCategoria", idcategoria);
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                cn.Open();
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Marca usuario = new Marca()
+                        {
+                            IdMarca = Convert.ToInt32(dr["IdMarca"]),
+                            Descripcion = dr["Descripcion"].ToString()
+                        };
+                        listado.Add(usuario);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
+            }
+            return listado;
+        }
     }
 }
