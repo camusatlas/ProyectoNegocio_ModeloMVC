@@ -35,7 +35,7 @@ namespace CapaPresentacionTienda.Controllers
                 if (oCliente.Reestablecer)
                 {
                     TempData["IdCliente"] = oCliente.IdCliente;
-                    return RedirectToAction("CambiarClave", "Aceeso");
+                    return RedirectToAction("CambiarClave", "Acceso");
                 }
                 else
                 {
