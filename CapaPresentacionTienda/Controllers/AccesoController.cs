@@ -2,6 +2,7 @@
 using CapaNegocio;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,12 +20,11 @@ namespace CapaPresentacionTienda.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(string correo, string clave)
+        public ActionResult Index(string correo, string clave, string name)
         {
             Cliente oCliente = null;
 
             oCliente = new CN_Cliente().Listar().Where(item => item.Correo == correo && item.Clave == CN_Recursos.ConvertirSha256(clave)).FirstOrDefault();
-
             if (oCliente == null)
             {
                 ViewBag.Error = "Correo o contraseña no son correctas";
