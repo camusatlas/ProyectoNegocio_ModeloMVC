@@ -377,7 +377,7 @@
 
             $("#formModal").modal("show");
 
-            $("#tabla tbody").off("click", '.btn-editar').on("click", '.btn-editar', function () {
+            $("#tabla tbody").on("click", '.btn-editar', function () {
                 var filaSeleccionada = $(this).closest("tr");
                 var data = tabladata.row(filaSeleccionada).data();
                 abrirModal(data);

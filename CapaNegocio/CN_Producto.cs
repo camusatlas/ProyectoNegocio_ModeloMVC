@@ -39,10 +39,6 @@ namespace CapaNegocio
             {
                 Mensaje = "Debe seleccionar una Categoria";
             }
-            else if (obj.oCategoria.IdCategoria == 0)
-            {
-                Mensaje = "Debe seleccionar una Categoria";
-            }
             else if (obj.Precio == 0)
             {
                 Mensaje = "Ingresar el precio del producto";

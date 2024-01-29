@@ -208,7 +208,7 @@ namespace CapaPresentacionAdmin.Controllers
         }
 
         [HttpPost]
-        public JsonResult ImagenProducto(int id)
+        public JsonResult ImagenEquipo(int id)
         {
             bool conversion;
             Producto oproducto = new CN_Producto().Listar().Where(p => p.IdProducto == id).FirstOrDefault();
