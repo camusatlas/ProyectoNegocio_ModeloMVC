@@ -150,46 +150,46 @@
                 MostrarMarca();
             },
                 beforeSend: function () {
-                $("#contenedor_categoria").LoadingOverlay("show")   ;
+                $("#contenedor_categoria").LoadingOverlay("show");
                 }
             })
         }
 
-    function MostrarMarca() {
+           function MostrarMarca() {
 
-        var _idcategoria = $("input[name=categoria]:checked").val()
+               var _idcategoria = $("input[name=categoria]:checked").val()
 
-        jQuery.ajax({
-        url: "@Url.Action("ListaMarcaporCategoria", "Tienda")",
-        type: "POST",
-        data: JSON.stringify({ idcategoria: _idcategoria }),
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        success: function (response) {
+               jQuery.ajax({
+               url: "@Url.Action("ListaMarcaporCategoria", "Tienda")",
+               type: "POST",
+               data: JSON.stringify({ idcategoria: _idcategoria }),
+               dataType: "json",
+               contentType: "application/json; charset=utf-8",
+               success: function (response) {
 
-            $("#contenedor_marca").html("");
-            $("#contenedor_marca").LoadingOverlay("hide");
+                   $("#contenedor_marca").html("");
+                   $("#contenedor_marca").LoadingOverlay("hide");
 
-            $("<div>").addClass("form-check").append(
+                   $("<div>").addClass("form-check").append(
 
-                $("<input>").addClass("form-check-input").attr({ "type": "radio", "name": "marca", "value": "0", "id": "mx", "checked": "checked" }),
-                $("<label>").addClass("from-check-label").text("Todos").attr({ "for": "mx" })
-            ).appendTo("#contenedor_marca")
+                       $("<input>").addClass("form-check-input").attr({ "type": "radio", "name": "marca", "value": "0", "id": "mx", "checked": "checked" }),
+                       $("<label>").addClass("from-check-label").text("Todos").attr({ "for": "mx" })
+                   ).appendTo("#contenedor_marca")
 
-            $.each(response.data, function (i, element) {
-                $("<div>").addClass("form-check").append(
+                   $.each(response.data, function (i, element) {
+                       $("<div>").addClass("form-check").append(
 
-                    $("<input>").addClass("form-check-input").attr({ "type": "radio", "name": "marca", "value": element.IdMarca, "id": "m" + i }),
-                    $("<label>").addClass("from-check-label").text(element.Descripcion).attr({ "for": "m" + i })
-                ).appendTo("#contenedor_marca")
-            })
+                           $("<input>").addClass("form-check-input").attr({ "type": "radio", "name": "marca", "value": element.IdMarca, "id": "m" + i }),
+                           $("<label>").addClass("from-check-label").text(element.Descripcion).attr({ "for": "m" + i })
+                       ).appendTo("#contenedor_marca")
+                   })
 
-        },
-            beforeSend: function () {
-                $("#contenedor_marca").LoadingOverlay("show");
-            }
-        })
-        }
+               },
+                   beforeSend: function () {
+                       $("#contenedor_marca").LoadingOverlay("show");
+                   }
+               })
+           }
 
         $(document).on("change", "input[name=categoria]", function () {
             MostrarMarca();
