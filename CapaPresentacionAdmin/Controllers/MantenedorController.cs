@@ -152,7 +152,7 @@ namespace CapaPresentacionAdmin.Controllers
             }
             else
             {
-                return Json(new { operacionExitosa = false, mensaje = "El formato del precio debe ser ##.##" }, JsonRequestBehavior.AllowGet);
+                return Json(new { operacionExitosa = false, mensaje = "El formato del precio debe ser ###.##" }, JsonRequestBehavior.AllowGet);
             }
 
             if (oProducto.IdProducto == 0)
