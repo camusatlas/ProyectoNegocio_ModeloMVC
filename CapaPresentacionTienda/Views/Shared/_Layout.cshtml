@@ -1,10 +1,11 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <link rel="icon" href="~/Img_web/Logo.png">
+    <title>Premium Kennel Perú</title>
     @Styles.Render("~/Content/css")
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -31,7 +32,7 @@
                         <a class="btn btn-outline-dark" href="@Url.Action("Carrito", "Tienda")">
                             <i class="fas fa-shopping-cart me-1"></i>
                             Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill" id="cantidadcarrito">0</span>
                         </a>
 
                         <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -60,5 +61,21 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+<script>
+    function MostrarCantidadCarrito() {
+        if ($("#cantidadcarrito").length > 0) {
+            jQuery.ajax({
+                url: '@Url.Action("CatidadEnCarrito", "Tienda")',
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#cantidadcarrito").text(data.cantidad)
+                }
+            })
+        }
+    }
+</script>
 </body>
 </html>

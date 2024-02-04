@@ -33,3 +33,42 @@
         </div>
     </div>
 </section>
+
+@section scripts {
+    <script>
+        $(document).on("click", "button.agregarcarrito", function () {
+            console.log($(this).data("idproducto"))
+        
+            jQuery.ajax({
+                url: '@Url.Action("AgregarCarrito", "Tienda")',
+                type: "POST",
+                data: JSON.stringify({ idproducto: $(this).data("idproducto") }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.respuesta) {
+                        MostrarCantidadCarrito();
+        
+                        @*swal({
+                            title: "Agregado al carrito",
+                            text: "¿Desea ir al carrito?",
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonText: "Si",
+                            cancelButtonText: "No",
+                            closeOnConfirm: true
+                        }, function () {
+                            window.location.href = '@Url.Action("Carrito", "Tienda")'
+                        })*@
+
+                        swal("", "Agregado al Carrito", "success");
+
+                    } else {
+                        swal("", data.mensaje, "warning");
+                    }
+                }
+            })
+        })
+    </script>
+
+    }

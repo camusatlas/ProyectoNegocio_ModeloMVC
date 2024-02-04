@@ -4,14 +4,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<header class="bg-dark py-5">
+<header class="custom-header py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Compra con Estilo</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Encuentra los mejores productos</p>
+            <h1 class="display-4 fw-bolder">Premium Kennel Perú</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Encuentra a tu fiel amigo</p>
         </div>
     </div>
 </header>
+
+<style>
+    .custom-header {
+        background-color: #efb810;
+    }
+    .btn-ver-detalle {
+        background-color: #efb810;
+        color: #fff; /* Cambia el color del texto si es necesario para asegurar la legibilidad */
+    }
+    /* Agrega estas reglas a tu hoja de estilos CSS o en línea en el HTML */
+    .bg-categoria {
+        background-color: #efb810; /* Color de fondo para la sección Categoría */
+        color: #fff; /* Color del texto */
+    }
+
+    .bg-marcas {
+        background-color: #efb810; /* Color de fondo para la sección Marcas */
+        color: #fff; /* Color del texto */
+    }
+
+    .btn-aplicar-filtro {
+        background-color: #efb810; /* Color de fondo del botón Aplicar filtros */
+        color: #fff; /* Color del texto */
+        border-color: #efb810; /* Color del borde del botón */
+    }
+
+</style>
 <!-- Section-->
 <section>
     <div class="container-fluid px-5 my-5">
@@ -21,11 +48,11 @@
                 <div class="row mb-3">
                     <div class="col-sm-12">
                         <div class="card">
-                            <div class="card-header bg-dark text-white">
+                            <div class="card-header bg-categoria text-white">
                                 Catgoria
                             </div>
                             <div id="contenedor_categoria" class="card-body">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -34,8 +61,8 @@
                 <div class="row mb-3">
                     <div class="col-sm-12">
                         <div class="card">
-                            <div class="card-header bg-dark text-white">
-                                Marcas
+                            <div class="card-header bg-marcas text-white">
+                                Filtrar por
                             </div>
                             <div id="contenedor_marca" class="card-body">
 
@@ -47,7 +74,7 @@
                 <div class="row mb-3">
                     <div class="col-sm-12">
                         <div class="d-grid gap-2">
-                            <button id="btnaplicarfiltro" class="btn btn-outline-dark btn-block" type="button">
+                            <button id="btnaplicarfiltro" class="btn btn-outline-dark btn-block btn-aplicar-filtro" type="button">
                                 <i class="fas fa-filter"></i>Aplicar filtros
                             </button>
                         </div>
@@ -225,10 +252,10 @@
                             $("<div>").addClass("d-grid gap-2").append(
                                 @if (Session["Cliente"]!=null)
                                  {
-                                     @:$("<button>").addClass("btn btn-succes mt-auto agregarcarrito").data("idproducto", element.IdProducto).text("Agregar al carrito"),
+                                     @:$("<button>").addClass("btn btn-success mt-auto agregarcarrito").data("idproducto", element.IdProducto).text("Agregar al carrito"),
                                  }
 
-                               $("<a>").addClass("btn btn-dark mt-auto")
+                                $("<a>").addClass("btn btn-dark mt-auto btn-ver-detalle")
                                    .attr({ "href": "@Url.Action("DetalleProducto", "Tienda")" + "?idproducto=" + element.IdProducto })
                                    .text("Ver detalle")
                             )
@@ -237,7 +264,7 @@
                         )
 
                     )
-                ).appendTo("#contenedor_producto"); // Añade al contenedor producto fuera del bucle
+                ).appendTo("#contenedor_producto")
             });
         },
         beforeSend: function () {
@@ -255,7 +282,36 @@
 
         })
 
+        $(document).on("click", "button.agregarcarrito", function () {
+            console.log($(this).data("idproducto"))
 
+            jQuery.ajax({
+                url: '@Url.Action("AgregarCarrito", "Tienda")',
+                type: "POST",
+                data: JSON.stringify({ idproducto: $(this).data("idproducto") }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.respuesta) {
+                        MostrarCantidadCarrito();
+
+                        swal({
+                            title: "Agregado al carrito",
+                            text: "¿Desea ir al carrito?",
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonText: "Si",
+                            cancelButtonText: "No",
+                            closeOnConfirm: true
+                        }, function () {
+                            window.location.href = '@Url.Action("Carrito", "Tienda")'
+                        })
+                    } else {
+                        swal("", data.mensaje, "warning");
+                    }
+                }
+            })
+        })
 
 
     </script>
