@@ -22,7 +22,7 @@
                                 </div>
                                 <hr class="mt-2 mb-2" />
 
-                                <div id="producto-carrito">
+                                <div id="productos-carrito">
                                     <div class="card mb-2 card-producto">
                                         <div class="card-body">
                                             <div class="row">
@@ -51,6 +51,12 @@
                                                         </button>
                                                     </div>
                                                 </div>
+
+                                                <div class="col-sm-2 align-self-center">
+
+                                                    <button class="btn btn-outline-danger btn-eliminar"><i class="far fa-trash-alt"></i>Eliminar</button>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -79,11 +85,11 @@
                                             <select class="form-select form-select-sm" id="cbodistrito"></select>
                                         </div>
                                         <div class="mb-2">
-                                            <label for="exampleInputEmail1" class="form-label">Nombre Contacto: </label>
+                                            <label for="txtnombrecontacto" class="form-label">Nombre Contacto: </label>
                                             <input type="text" class="form-control form-control-sm" id="txtnombrecontacto" autocomplete="off" />
                                         </div>
                                         <div class="mb-2">
-                                            <label for="exampleInputEmail1" class="form-label">Dirección: </label>
+                                            <label for="txtdireccion" class="form-label">Dirección: </label>
                                             <input type="text" class="form-control form-control-sm" id="txtdireccion" autocomplete="off" />
                                         </div>
                                         <div class="mb-2">
@@ -108,10 +114,76 @@
 </div>
 
 @section scripts {
-    
+
     <script>
 
         $(document).ready(function () {
+
+            jQuery.ajax({
+                url: '@Url.Action("ListarProductosCarrito", "Tienda")',
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    $("#productos-carrito").html("");
+
+                    $("#productos-carrito").LoadingOverlay("hide");
+
+                    $.each(response.data, function (i, item) {
+
+                        //<div class="card mb-2 card-producto">
+                        //    <div class="card-body">
+                        //        <div class="row">
+
+                        //            <div class="col-sm-2 align-self-center d-flex justify-content-center">
+                        //                <img class="rounded" src="https://dummyimage.com/450x300/dee2e6/6c57d.jpg" style="width:100px; height:100px" />
+                        //            </div>
+
+                        //            <div class="col-sm-4 align-self-center">
+                        //                <span class="font-wight-bold d-block">Marca</span>
+                        //                <span>Nombre Producto</span>
+                        //            </div>
+
+                        //            <div class="col-sm-2 align-self-center">
+                        //                <span>Precio : S/. 1500</span>
+                        //            </div>
+
+                        //            <div class="col-sm-2 align-self-center">
+                        //                <div class="d-flex">
+                        //                    <button class="btn btn-outline-secondary btn-restar rounded-0">
+                        //                        <i class="fas fa-minus"></i>
+                        //                    </button>
+                        //                    <input class="form-control input-cantidad p-1 text-center rounded-0" disabled style="width:40px" />
+                        //                    <button class="btn btn-outline-secondary btn-sumar rounded-0">
+                        //                        <i class="fas fa-plus"></i>
+                        //                    </button>
+                        //                </div>
+                        //            </div>
+
+                        //            <div class="col-sm-2 align-self-center">
+
+                        //                <button class="btn btn-outline-danger btn-eliminar"><i class="far fa-trash-alt"></i>Eliminar</button>
+                        //            </div>
+
+                        //        </div>
+                        //    </div>
+                        //</div>
+
+                        $("<div>").addClass("card mb-2 card-producto").append(
+
+
+
+
+
+                            "Hola mundo"
+                        ).appendTo("#producto-carrito")
+                    })
+                }
+            })
+
+
+
+
             ListarDepartamento()
         })
 
@@ -173,9 +245,9 @@
         function ListarDistrito() {
 
             $("#cbodistrito").html("")
-        
+
             $("<option>").attr({ "value": "00", "disabled": "disabled", "selected": "true" }).text("Seleccionar").appendTo("#cbodistrito")
-        
+
             jQuery.ajax({
                 url: '@Url.Action("ObtenerDistrito", "Tienda")',
                 type: "POST",
@@ -190,9 +262,9 @@
                     }
                 }
             })
-        
+
         }
 
     </script>
-    
-    }
+
+}
