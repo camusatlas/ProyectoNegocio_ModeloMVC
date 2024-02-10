@@ -80,7 +80,7 @@ namespace CapaDatos
             return resultado;
         }
 
-        public int CantidadEnCarrito(int idCliente)
+        public int CantidadEnCarrito(int idcliente)
         {
             int resultado = 0;
 
@@ -89,7 +89,7 @@ namespace CapaDatos
                 using (SqlCommand cmd = new SqlCommand("select count(*) from CARRITO where IdCliente = @idcliente", cn))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@idcliente", idCliente);
+                    cmd.Parameters.AddWithValue("@idcliente", idcliente);
                     cn.Open();
                     resultado = Convert.ToInt32(cmd.ExecuteScalar());
                 }
@@ -104,41 +104,46 @@ namespace CapaDatos
         public List<Carrito> ListarProducto(int idcliente)
         {
             List<Carrito> listado = new List<Carrito>();
-            SqlCommand cmd = new SqlCommand("sp_ObtenerCarritoCliente", cn);
-            cmd.Parameters.AddWithValue("@IdCliente", idcliente);
-            cmd.CommandType = CommandType.StoredProcedure;
+
             try
             {
-                cn.Open();
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    while (dr.Read())
+                    string query = "SELECT * FROM fn_obtenerCarritoCliente(@IdCliente)";
+
+                    SqlCommand cmd = new SqlCommand(query, oconexion);
+                    cmd.Parameters.AddWithValue("@IdCliente", idcliente);
+                    cmd.CommandType = CommandType.Text;
+
+                    oconexion.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        Carrito carrito = new Carrito()
+                        while (dr.Read())
                         {
-                            oProducto = new Producto()
+                            listado.Add(new Carrito()
                             {
-                                IdProducto = Convert.ToInt32(dr["IdProducto"]),
-                                Nombre = dr["Nombre"].ToString(),
-                                Precio = Convert.ToDecimal(dr["Precio"], new CultureInfo("es-PE")),
-                                RutaImagen = dr["RutaImagen"].ToString(),
-                                NombreImagen = dr["NombreImagen"].ToString(),
-                                oMarca = new Marca() { Descripcion = dr["DesMarca"].ToString() }
-                            },
-                            Cantidad = Convert.ToInt32(dr["Cantidad"])
-                        };
-                        listado.Add(carrito);
+                                oProducto = new Producto()
+                                {
+                                    IdProducto = Convert.ToInt32(dr["IdProducto"]),
+                                    Nombre = dr["Nombre"].ToString(),
+                                    Precio = Convert.ToDecimal(dr["Precio"], new CultureInfo("es-PE")),
+                                    RutaImagen = dr["RutaImagen"].ToString(),
+                                    NombreImagen = dr["NombreImagen"].ToString(),
+                                    oMarca = new Marca() { Descripcion = dr["DesMarca"].ToString() }
+                                },
+                                Cantidad = Convert.ToInt32(dr["Cantidad"])
+                            });
+                        }
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+
+                listado = new List<Carrito>();
             }
-            finally
-            {
-                cn.Close(); 
-            }
+
             return listado;
         }
 

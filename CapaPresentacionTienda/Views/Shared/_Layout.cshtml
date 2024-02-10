@@ -63,6 +63,11 @@
     @RenderSection("scripts", required: false)
 
 <script>
+
+    $(document).ready(function () {
+        MostrarCantidadCarrito();
+    })
+
     function MostrarCantidadCarrito() {
         if ($("#cantidadcarrito").length > 0) {
             jQuery.ajax({

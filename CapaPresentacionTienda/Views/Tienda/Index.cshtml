@@ -243,7 +243,7 @@
                                 $("<div>").addClass("card-body p-4").append(
                                     $("<div>").addClass("text-center").append(
                                         $("<h5>").addClass("fw-bolder").text(element.Nombre),
-                                        "$ " + element.Precio.toFixed(2) + "USD"
+                                        "S/ " + element.Precio.toFixed(2)
                                     )
                                 ),
                                 $("<div>").addClass("card-footer p-2 pt-0 border-top-0 bg-transparent").append(
@@ -293,6 +293,7 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     if (data.respuesta) {
+
                         MostrarCantidadCarrito();
 
                         swal({
@@ -300,6 +301,7 @@
                             text: "¿Desea ir al carrito?",
                             type: "success",
                             showCancelButton: true,
+                            confirmButtonClass: "btn-primary",
                             confirmButtonText: "Si",
                             cancelButtonText: "No",
                             closeOnConfirm: true

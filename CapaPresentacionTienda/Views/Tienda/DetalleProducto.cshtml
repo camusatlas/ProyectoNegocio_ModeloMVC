@@ -48,20 +48,8 @@
                 success: function (data) {
                     if (data.respuesta) {
                         MostrarCantidadCarrito();
-        
-                        @*swal({
-                            title: "Agregado al carrito",
-                            text: "¿Desea ir al carrito?",
-                            type: "success",
-                            showCancelButton: true,
-                            confirmButtonText: "Si",
-                            cancelButtonText: "No",
-                            closeOnConfirm: true
-                        }, function () {
-                            window.location.href = '@Url.Action("Carrito", "Tienda")'
-                        })*@
 
-                        swal("", "Agregado al Carrito", "success");
+                        swal("", "Agregar al carrito", "success");
 
                     } else {
                         swal("", data.mensaje, "warning");
