@@ -38,7 +38,7 @@ namespace CapaDatos
                             Apellidos = dr["Apellidos"].ToString(),
                             Correo = dr["Correo"].ToString(),
                             Clave = dr["Clave"].ToString(),
-                            Reestablecer = Convert.ToBoolean(dr["Reestablecer"]),
+                            Reestablecer = Convert.ToBoolean(dr["Restablecer"]),
 
                         };
                         listado.Add(Cliente);

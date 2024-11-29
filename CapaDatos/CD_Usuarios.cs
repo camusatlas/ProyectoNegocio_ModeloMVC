@@ -39,7 +39,7 @@ namespace CapaDatos
                             Apellidos = dr["Apellidos"].ToString(),
                             Correo = dr["Correo"].ToString(),
                             Clave = dr["Clave"].ToString(),
-                            Reestablecer = Convert.ToBoolean(dr["Reestablecer"]),
+                            Reestablecer = Convert.ToBoolean(dr["Restablecer"]),
                             Activo = Convert.ToBoolean(dr["Activo"])
                         };
                         listado.Add(usuario);
@@ -101,7 +101,7 @@ namespace CapaDatos
             Mensaje = string.Empty;
             try
             {
-                using (SqlCommand cmd = new SqlCommand("sp_Editar", cn))
+                using (SqlCommand cmd = new SqlCommand("sp_EditarUsuario", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -158,7 +158,7 @@ namespace CapaDatos
             Mensaje = string.Empty;
             try
             {
-                using (SqlCommand cmd = new SqlCommand("update usuario set clave = @nuevaclave, reestablecer = 0 where idusuario = @id", cn))
+                using (SqlCommand cmd = new SqlCommand("update USUARIO set clave = @nuevaclave, restablecer = 0 where IdUsuario = @id", cn))
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.AddWithValue("@id", idusuario);
@@ -182,7 +182,7 @@ namespace CapaDatos
             Mensaje = string.Empty;
             try
             {
-                using (SqlCommand cmd = new SqlCommand("update usuario set clave = @clave, reestablecer = 1 where idusuario = @id", cn))
+                using (SqlCommand cmd = new SqlCommand("update USUARIO set clave = @clave, Restablecer = 1 where IdUsuario = @id", cn))
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.AddWithValue("@id", idusuario);

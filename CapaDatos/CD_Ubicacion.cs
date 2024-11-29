@@ -22,7 +22,7 @@ namespace CapaDatos
         public List<Departamento> ObtenerDepartamento()
         {
             List<Departamento> listado = new List<Departamento>();
-            SqlCommand cmd = new SqlCommand("ObtenerUbicacionGeografica", cn);
+            SqlCommand cmd = new SqlCommand("ListarDepartamento", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             try
             {

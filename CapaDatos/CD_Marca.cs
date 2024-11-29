@@ -60,7 +60,7 @@ namespace CapaDatos
             Mensaje = string.Empty;
             try
             {
-                using (SqlCommand cmd = new SqlCommand("sp_RegistroMarca", cn))
+                using (SqlCommand cmd = new SqlCommand("sp_RegistrarMarca", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
