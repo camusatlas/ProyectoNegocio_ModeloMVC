@@ -153,6 +153,13 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imagenes\foto1.jpg" />
+    <Content Include="Imagenes\foto2.jpg" />
+    <Content Include="Imagenes\foto3.jpg" />
+    <Content Include="Imagenes\foto4.jpg" />
+    <Content Include="Imagenes\foto5.jpg" />
+    <Content Include="Imagenes\foto6.jpg" />
+    <Content Include="Imagenes\login.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
