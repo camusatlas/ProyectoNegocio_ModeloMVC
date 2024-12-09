@@ -347,7 +347,7 @@
                 $("#cboactivo").val(json.Activo == true ? 1 : 0);
 
                 jQuery.ajax({
-                    url: '@Url.Action("ImagenProducto", "Mantenedor")',
+                    url: '@Url.Action("ImagenEquipo", "Mantenedor")',
                     type: "POST",
                     data: JSON.stringify({ id: json.IdProducto }),
                     dataType: "json",
