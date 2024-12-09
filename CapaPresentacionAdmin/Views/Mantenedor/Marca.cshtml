@@ -132,47 +132,46 @@
     });
 
     $("#tabla tbody").on("click", '.btn-eliminar', function () {
-        var categoriaSeleccionada = $(this).closest("tr");
-        var data = tabladata.row(categoriaSeleccionada).data();
+    var marcaSeleccionada = $(this).closest("tr");
+    var data = tabladata.row(marcaSeleccionada).data();
 
-        swal({
-            title: "¿Está seguro?",
-            text: "¿Desea eliminar la categoria?",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonClass: "btn-primary",
-            confirmButtonText: "Sí",
-            cancelButtonText: "No",
-            closeOnConfirm: true
-        },
-            function () {
-                var Marca = {
-                    IdMarca: data.IdMarca // Obtener el IdUsuario del registro
-            };
-            jQuery.ajax({
-                url: '@Url.Action("EliminarMarca", "Mantenedor")',
-                type: 'POST',
-                data: JSON.stringify({ id: Marca.IdMarca }), // Enviar solo el IdUsuario
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    if (data.resultado) {
-                        tabladata.row(categoriaSeleccionada).remove().draw();
-                    } else {
-                        swal("No se pudo eliminar", data.mensaje, "error");
-                    }
-                },
-                error: function (error) {
-                    console.log(error);
-                },
-                beforeSend: function () {
-                    // Código de beforeSend si lo requieres
+    swal({
+        title: "¿Está seguro?",
+        text: "¿Desea eliminar la marca?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-primary",
+        confirmButtonText: "Sí",
+        cancelButtonText: "No",
+        closeOnConfirm: false // Evita cerrar el modal automáticamente
+    },
+    function () {
+        var Marca = {
+            IdMarca: data.IdMarca // Obtén el ID de la marca seleccionada
+        };
+
+        jQuery.ajax({
+            url: '@Url.Action("EliminarMarca", "Mantenedor")',
+            type: 'POST',
+            data: JSON.stringify({ id: Marca.IdMarca }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.resultado) {
+                    tabladata.row(marcaSeleccionada).remove().draw();
+                    swal.close(); // Cierra el modal de confirmación
+                } else {
+                    swal("No se pudo eliminar", data.mensaje, "error"); // Muestra el mensaje de error del servidor
                 }
-            });
+            },
+            error: function (error) {
+                swal("Error", "Ocurrió un problema al intentar eliminar la marca", "error");
+                console.error(error);
+            }
         });
-
-        console.log(data);
     });
+});
+
 });
 
         function abrirModal(json) {
