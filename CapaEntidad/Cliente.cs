@@ -16,4 +16,9 @@ namespace CapaEntidad
         public string Confirmarclave { get; set; }
         public bool Reestablecer { get; set; }
     }
+
+    //pROBANDO
 }
+
+
+
